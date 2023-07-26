@@ -4,7 +4,8 @@ const ProductsSlice=createSlice({
     name:'filtered products',
     initialState:{
         filteredProducts:JSON.parse(sessionStorage.getItem('filteredData')) || storeData,
-        productCategories:['Hoodies','Dresses','Suits','Shoes','T-Shirts','Jeans','Jackets','Bags']
+        productCategories:['Hoodies','Dresses','Suits','Shoes','T-Shirts','Jeans','Jackets','Bags'],
+        selectedProduct:'' || JSON.parse(sessionStorage.getItem('selecteditem'))
     },
     reducers:{
         typesOfProducts(state,action){
@@ -24,9 +25,21 @@ const ProductsSlice=createSlice({
                 return err;
             }
             
+        },
+        viewSelectedProduct(state,action){
+            try{
+                console.log(action.payload)
+                const filter=state.filteredProducts.filter((product)=>product.id===action.payload)
+                state.selectedProduct=filter;
+                sessionStorage.setItem('selecteditem',JSON.stringify(filter))
+                console.log(state.selectedProduct)
+            }
+            catch(err){
+                console.log(err)
+            }
         }
     }
 })
 
-export const {filterProducts,productCategories}=ProductsSlice.actions;
+export const {filterProducts,productCategories,viewSelectedProduct}=ProductsSlice.actions;
 export default ProductsSlice.reducer;
