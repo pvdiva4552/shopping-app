@@ -13,13 +13,11 @@ const NavigateButtons = () => {
         <div className='flex-box'>
             {
                 buttons.map((eachButton)=>
-                    <NavLink to={`filteredProducts/`+eachButton}><button className='navigatebutton' onClick={()=>dispatch(filterProducts(eachButton))}>{eachButton.toUpperCase()}</button></NavLink>
+                    <NavLink to={`/filteredProducts/`+eachButton}><button className='navigatebutton' onClick={()=>dispatch(filterProducts(eachButton))}>{eachButton.toUpperCase()}</button></NavLink>
                 )
             }
         </div>
-        <h2 className='sales'>
-            SALES UPTO 50% OFF
-        </h2>
+        
     </>
   )
 }
